@@ -102,7 +102,24 @@ void tambahMahasiswa() {
 void cariMahasiswa() {
   // TODO: minta kata kunci, tampilkan semua mahasiswa yang namanya mengandung
   // kata kunci tersebut (huruf besar/kecil tidak dibedakan).
-  print('Fitur belum tersedia.');
+  final kataKunci = bacaTeks('Masukkan nama').toLowerCase();
+
+  bool ditemukan = false;
+
+  print('\n=== Hasil Pencarian Mahasiswa ===');
+
+  for (final mahasiswa in daftarMahasiswa) {
+    final nama = mahasiswa['nama'].toString();
+
+    if (nama.toLowerCase().contains(kataKunci)) {
+      print('${mahasiswa['nim']} | ${mahasiswa['nama']}');
+      ditemukan = true;
+    }
+  }
+
+  if (!ditemukan) {
+    print('Mahasiswa dengan nama "$kataKunci" tidak ditemukan.');
+  }
 }
 
 /// Menu 6 [Sedang]: mengubah status absensi seorang mahasiswa.
@@ -143,33 +160,8 @@ void tampilkanRekap() {
 void tampilkanPersentase() {
   // TODO: persentase = jumlah hadir / jumlah pertemuan x 100.
   // Tampilkan 1 angka di belakang koma.
-  print('\n=== Persentase Kehadiran ===');
-
-  if (absensi.isEmpty) {
-    print('Belum ada data absensi.');
-    return;
-  }
-
-  for (final mhs in daftarMahasiswa) {
-    final nim = mhs['nim'] as String;
-
-    int jumlahHadir = 0;
-
-    for (final data in absensi.values) {
-      if (data[nim] == StatusHadir.hadir) {
-        jumlahHadir++;
-      }
-    }
-
-    final persentase = (jumlahHadir / absensi.length) * 100;
-
-    print(
-      '${mhs['nim']} | ${mhs['nama']} | '
-      '${persentase.toStringAsFixed(1)}%',
-    );
-  }
+print('Fitur belum tersedia.');
 }
-
 /// Menu 9 [Sulit]: menampilkan mahasiswa dengan kehadiran di bawah batas.
 void tampilkanDiBawahBatas() {
   // TODO: tampilkan mahasiswa yang persentase kehadirannya < batasKehadiran
